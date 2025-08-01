@@ -35,9 +35,11 @@ module.exports = grammar({
     ),
 
     proof: $ => seq(
-      'Proof.',
+      'Proof',
+      '.',
       repeat($._tactic),
-      'Qed.'
+      'Qed',
+      '.'
     ),
 
     command: $ => seq(
@@ -60,7 +62,14 @@ module.exports = grammar({
 
     string: $ => /"[^"]*"/,
 
-    comment: $ => token(seq('(*', /[^*]*\*+([^/*][^*]*\*+)*/, ')'))
+    comment: $ => seq(
+      '(*',
+      repeat(choice(
+        $.comment,
+        /[^*]/,
+        seq('*', /[^)]/)
+      )),
+      '*)'
+    ),
   }
 });
-
