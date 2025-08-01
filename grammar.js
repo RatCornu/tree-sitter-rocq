@@ -36,5 +36,15 @@ module.exports = grammar({
       )),
       '*)'
     ),
+
+    definition: $ => seq(
+      'Definition',
+      field('name', $.identifier),
+      ':=',
+      $.expression
+    ),
+
+    expression: $ => /.+\./,
+
   }
 });
