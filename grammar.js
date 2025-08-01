@@ -7,60 +7,25 @@ module.exports = grammar({
   ],
 
   rules: {
-    source_file: $ => repeat($._statement),
+    source_file: $ => repeat($._token),
 
-    _statement: $ => choice(
-      $.definition,
-      $.theorem,
-      $.proof,
-      $.command
-    ),
-
-    definition: $ => seq(
-      choice('Definition', 'Fixpoint', 'Inductive'),
-      $.identifier,
-      ':',
-      $.identifier,
-      ':=',
-      $._expr,
-      '.'
-    ),
-
-    theorem: $ => seq(
-      choice('Theorem', 'Lemma', 'Proposition'),
-      $.identifier,
-      ':',
-      $._expr,
-      '.'
-    ),
-
-    proof: $ => seq(
-      'Proof',
-      '.',
-      repeat($._tactic),
-      'Qed',
-      '.'
-    ),
-
-    command: $ => seq(
-      choice('Require', 'Import', 'From'),
-      repeat($.identifier),
-      '.'
-    ),
-
-    _tactic: $ => seq($.identifier, '.'),
-
-    _expr: $ => choice(
-      $.identifier,
+    _token: $ => choice(
+      $.comment,
+      $.string,
       $.number,
-      $.string
+      $.identifier,
+      /[^\s]+/
     ),
 
-    identifier: $ => /[A-Za-z_][A-Za-z0-9_]*/,
+    identifier: $ => /[A-Za-z_][A-Za-z0-9_']*/,
 
-    number: $ => /\d+/,
+    number: $ => /\d+/, 
 
-    string: $ => /"[^"]*"/,
+    string: $ => token(seq(
+      '"',
+      /[^"]*/,
+      '"'
+    )),
 
     comment: $ => seq(
       '(*',
