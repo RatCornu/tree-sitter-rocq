@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "rocq",
+      "camelcase": "Rocq",
+      "title": "Rocq",
+      "scope": "source.rocq",
+      "file-types": [
+        "v"
+      ],
+      "injection-regex": "^rocq$",
+      "class-name": "TreeSitterRocq"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "A Tree Sitter parser for the Rocq Prover language",
+    "authors": [
+      {
+        "name": "Luis Ángel Méndez Gort",
+        "email": "lamg@protonmail.com",
+        "url": "https://github.com/lamg"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/lamg/tree-sitter-rocq",
+      "funding": "https://github.com/lamg/tree-sitter-rocq"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

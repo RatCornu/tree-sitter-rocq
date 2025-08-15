@@ -1,0 +1,53 @@
+{
+  "name": "tree-sitter-rocq",
+  "version": "0.1.0",
+  "description": "A Tree Sitter parser for the Rocq Prover language",
+  "repository": "https://github.com/lamg/tree-sitter-rocq",
+  "funding": "https://github.com/lamg/tree-sitter-rocq",
+  "license": "MIT",
+  "author": {
+    "name": "Luis Ángel Méndez Gort",
+    "email": "lamg@protonmail.com",
+    "url": "https://github.com/lamg"
+  },
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "rocq"
+  ],
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.3.1",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.8"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.22.4"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  }
+}
